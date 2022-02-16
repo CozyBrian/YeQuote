@@ -3,6 +3,7 @@ import { colors } from "../constants";
 import styled from "styled-components/native";
 import { MenuIcon, RefreshIcon } from "../utils/icons";
 import { useFonts, Roboto_400Regular } from "@expo-google-fonts/roboto";
+import { Pressable } from "react-native";
 
 const AppView = styled.View`
   flex: 1;
@@ -26,6 +27,13 @@ export const YeApp = ({ navigation }) => {
 
   const [fontLoaded] = useFonts({ Roboto_400Regular });
 
+  const copy = () => {
+    console.log("copied");
+  };
+  const addFavorite = () => {
+    console.log("added");
+  };
+
   const getQuote = () => {
     fetch("https://api.kanye.rest/")
       .then((response) => response.json())
@@ -43,7 +51,9 @@ export const YeApp = ({ navigation }) => {
     <AppView>
       <MenuIcon onPress={() => navigation.toggleDrawer()} />
       <RefreshIcon onPress={() => getQuote()} />
-      <QuoteView>{fontLoaded ? <YeText>{quote}</YeText> : null}</QuoteView>
+      <Pressable onPress={() => copy()} onLongPress={() => addFavorite()}>
+        <QuoteView>{fontLoaded ? <YeText>{quote}</YeText> : null}</QuoteView>
+      </Pressable>
     </AppView>
   );
 };

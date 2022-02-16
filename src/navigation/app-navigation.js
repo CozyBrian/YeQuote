@@ -6,7 +6,7 @@ import {
 } from "@react-navigation/drawer";
 import { NavigationContainer } from "@react-navigation/native";
 import { MenuIcon } from "../utils/icons";
-import { YeApp } from "../components/kanyescreen";
+import { YeApp } from "../components/main-screen";
 
 function NotificationsScreen({ navigation }) {
   return (
