@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { colors } from "../constants";
 import styled from "styled-components/native";
 import { MenuIcon, RefreshIcon } from "../utils/icons";
 import { useFonts, Roboto_400Regular } from "@expo-google-fonts/roboto";
+import { QuoteContext } from "../context/quote-context";
 import { Pressable } from "react-native";
 
 const AppView = styled.View`
@@ -23,29 +24,9 @@ const QuoteView = styled.View`
 `;
 
 export const YeApp = ({ navigation }) => {
-  const [quote, setQuote] = useState(null);
+  const { quote, copy, addFavorite, getQuote } = useContext(QuoteContext);
 
   const [fontLoaded] = useFonts({ Roboto_400Regular });
-
-  const copy = () => {
-    console.log("copied");
-  };
-  const addFavorite = () => {
-    console.log("added");
-  };
-
-  const getQuote = () => {
-    fetch("https://api.kanye.rest/")
-      .then((response) => response.json())
-      .then((data) => {
-        setQuote(null);
-        setQuote(data.quote);
-      });
-  };
-
-  useEffect(() => {
-    getQuote();
-  }, []);
 
   return (
     <AppView>
