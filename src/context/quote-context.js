@@ -4,12 +4,23 @@ export const QuoteContext = createContext();
 
 export const QuoteContextProvider = ({ children }) => {
   const [quote, setQuote] = useState(null);
+  const [favorites, setFavorite] = useState([]);
 
   const copy = () => {
     console.log("copied");
   };
-  const addFavorite = () => {
-    console.log("added");
+
+  const addFavorite = (quote) => {
+    if (favorites.includes(quote)) {
+      return;
+    }
+    setFavorite([...favorites, quote]);
+    console.log(favorites);
+  };
+
+  const delFavorite = (quote) => {
+    const newFavourites = favorites.filter((x) => x !== quote);
+    setFavorite(newFavourites);
   };
 
   const getQuote = () => {
@@ -26,7 +37,9 @@ export const QuoteContextProvider = ({ children }) => {
   }, []);
 
   return (
-    <QuoteContext.Provider value={{ quote, copy, addFavorite, getQuote }}>
+    <QuoteContext.Provider
+      value={{ quote, copy, addFavorite, getQuote, favorites, delFavorite }}
+    >
       {children}
     </QuoteContext.Provider>
   );

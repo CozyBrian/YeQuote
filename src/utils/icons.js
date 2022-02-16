@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components/native";
 import { Foundation } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native";
-import { Entypo, AntDesign } from "@expo/vector-icons";
+import { Entypo, AntDesign, Ionicons } from "@expo/vector-icons";
 
 const Icon1 = styled.View`
   margin: 20px;
@@ -54,4 +54,12 @@ export const FavoriteIcon = ({ isFavourite, onPress }) => {
       </TouchableOpacity>
     </Icon2>
   );
+};
+
+export const CopyIcon = () => {
+  return <Ionicons name="clipboard" size={18} color="white" />;
+};
+
+export const FavIcon = () => {
+  return <AntDesign name={"heart"} size={18} color={"white"} />;
 };
