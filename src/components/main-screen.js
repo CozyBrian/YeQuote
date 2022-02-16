@@ -1,11 +1,12 @@
-import React, { useContext } from "react";
+import React, { useContext, useRef } from "react";
 import { colors } from "../constants";
 import styled from "styled-components/native";
-import { MenuIcon, RefreshIcon } from "../utils/icons";
+import { MenuIcon, RefreshIcon, CopyIcon, FavIcon } from "../utils/icons";
 import { SafeArea } from "../utils/SafeArea";
 import { useFonts, Roboto_400Regular } from "@expo-google-fonts/roboto";
 import { QuoteContext } from "../context/quote-context";
-import { Pressable, View } from "react-native";
+import Toast from "react-native-fast-toast";
+import { Pressable } from "react-native";
 
 const Container = styled.View`
   flex: 1;
@@ -38,6 +39,18 @@ const IconView = styled.View`
 export const YeApp = ({ navigation }) => {
   const { quote, copy, addFavorite, getQuote } = useContext(QuoteContext);
 
+  const copyToast = useRef(null);
+  const addToast = useRef(null);
+
+  const showToast = () => {
+    copyToast.current.show("Copied", { icon: <CopyIcon />, duration: 600 });
+  };
+
+  const favToast = () => {
+    addToast.current.show("Added", { icon: <FavIcon />, duration: 600 });
+    addFavorite(quote);
+  };
+
   const [fontLoaded] = useFonts({ Roboto_400Regular });
 
   return (
@@ -49,10 +62,15 @@ export const YeApp = ({ navigation }) => {
         </IconView>
         <AppView>
           <QuoteView>
-            <Pressable onPress={() => copy()} onLongPress={() => addFavorite()}>
+            <Pressable
+              onPress={() => showToast()}
+              onLongPress={() => favToast(quote)}
+            >
               {fontLoaded ? <YeText>{quote}</YeText> : null}
             </Pressable>
           </QuoteView>
+          <Toast ref={copyToast} />
+          <Toast ref={addToast} />
         </AppView>
       </SafeArea>
     </Container>
