@@ -1,10 +1,16 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import { colors } from "../constants";
 import styled from "styled-components/native";
 import { MenuIcon, RefreshIcon } from "../utils/icons";
+import { SafeArea } from "../utils/SafeArea";
 import { useFonts, Roboto_400Regular } from "@expo-google-fonts/roboto";
 import { QuoteContext } from "../context/quote-context";
-import { Pressable } from "react-native";
+import { Pressable, View } from "react-native";
+
+const Container = styled.View`
+  flex: 1;
+  background-color: ${colors.blue};
+`;
 
 const AppView = styled.View`
   flex: 1;
@@ -20,7 +26,13 @@ const YeText = styled.Text`
 `;
 
 const QuoteView = styled.View`
+  margin-top: -70px
   padding: 16px;
+`;
+
+const IconView = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
 `;
 
 export const YeApp = ({ navigation }) => {
@@ -29,12 +41,20 @@ export const YeApp = ({ navigation }) => {
   const [fontLoaded] = useFonts({ Roboto_400Regular });
 
   return (
-    <AppView>
-      <MenuIcon onPress={() => navigation.toggleDrawer()} />
-      <RefreshIcon onPress={() => getQuote()} />
-      <Pressable onPress={() => copy()} onLongPress={() => addFavorite()}>
-        <QuoteView>{fontLoaded ? <YeText>{quote}</YeText> : null}</QuoteView>
-      </Pressable>
-    </AppView>
+    <Container>
+      <SafeArea>
+        <IconView>
+          <MenuIcon onPress={() => navigation.toggleDrawer()} />
+          <RefreshIcon onPress={() => getQuote()} />
+        </IconView>
+        <AppView>
+          <QuoteView>
+            <Pressable onPress={() => copy()} onLongPress={() => addFavorite()}>
+              {fontLoaded ? <YeText>{quote}</YeText> : null}
+            </Pressable>
+          </QuoteView>
+        </AppView>
+      </SafeArea>
+    </Container>
   );
 };

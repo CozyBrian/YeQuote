@@ -5,6 +5,7 @@ import {
   DrawerItemList,
 } from "@react-navigation/drawer";
 import { NavigationContainer } from "@react-navigation/native";
+import { SafeArea1 } from "../utils/SafeArea";
 import { MenuIcon } from "../utils/icons";
 import { YeApp } from "../components/main-screen";
 
@@ -30,13 +31,15 @@ export const AppNavigation = () => {
         drawerContent={(props) => {
           return (
             <>
-              <View style={{ paddingTop: 70 }}>
-                <DrawerItemList {...props} />
-              </View>
-              <MenuIcon
-                color="black"
-                onPress={() => props.navigation.toggleDrawer()}
-              />
+              <SafeArea1>
+                <MenuIcon
+                  color="black"
+                  onPress={() => props.navigation.toggleDrawer()}
+                />
+                <View>
+                  <DrawerItemList {...props} />
+                </View>
+              </SafeArea1>
             </>
           );
         }}
