@@ -5,7 +5,7 @@ import { YeApp } from './src/components/kanyescreen';
 export default function App() {
   return (
     <>
-      <StatusBar style="auto" />
+      <StatusBar style="light" />
       <YeApp />
     </>
   );
