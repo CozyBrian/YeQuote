@@ -5,7 +5,7 @@ import { MenuIcon, RefreshIcon, CopyIcon, FavIcon } from "../utils/icons";
 import { SafeArea } from "../utils/SafeArea";
 import { useFonts, Roboto_400Regular } from "@expo-google-fonts/roboto";
 import { QuoteContext } from "../context/quote-context";
-import Toast from "react-native-fast-toast";
+import { useToast } from "react-native-fast-toast";
 import { Pressable } from "react-native";
 
 const Container = styled.View`
@@ -39,15 +39,15 @@ const IconView = styled.View`
 export const YeApp = ({ navigation }) => {
   const { quote, copy, addFavorite, getQuote } = useContext(QuoteContext);
 
-  const copyToast = useRef(null);
-  const addToast = useRef(null);
+  const copyToast = useToast();
+  const addToast = useToast();
 
   const showToast = () => {
-    copyToast.current.show("Copied", { icon: <CopyIcon />, duration: 600 });
+    copyToast.show("Copied", { icon: <CopyIcon />, duration: 800 });
   };
 
   const favToast = () => {
-    addToast.current.show("Added", { icon: <FavIcon />, duration: 600 });
+    addToast.show("Added", { icon: <FavIcon />, duration: 800 });
     addFavorite(quote);
   };
 
@@ -69,8 +69,6 @@ export const YeApp = ({ navigation }) => {
               {fontLoaded ? <YeText>{quote}</YeText> : null}
             </Pressable>
           </QuoteView>
-          <Toast ref={copyToast} />
-          <Toast ref={addToast} />
         </AppView>
       </SafeArea>
     </Container>

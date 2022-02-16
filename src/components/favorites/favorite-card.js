@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import styled from "styled-components/native";
 import { Pressable } from "react-native";
 import { FavoriteIcon } from "../../utils/icons";
@@ -24,8 +24,6 @@ const FavTextView = styled.View`
 `;
 
 export const FavoriteCard = ({ text = "Hello", onPress, t }) => {
-  const isFavorite = true;
-
   return (
     <FavoritesCard>
       <FavTextView>
@@ -33,7 +31,7 @@ export const FavoriteCard = ({ text = "Hello", onPress, t }) => {
           <FavText numberOfLines={1}>{text}</FavText>
         </Pressable>
       </FavTextView>
-      <FavoriteIcon isFavourite={isFavorite} onPress={onPress} />
+      <FavoriteIcon onPress={onPress} />
     </FavoritesCard>
   );
 };

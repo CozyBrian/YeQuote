@@ -42,15 +42,11 @@ export const MenuIcon = ({ onPress, color = "white" }) => {
   );
 };
 
-export const FavoriteIcon = ({ isFavourite, onPress }) => {
+export const FavoriteIcon = ({ onPress }) => {
   return (
     <Icon2>
       <TouchableOpacity onPress={onPress}>
-        <AntDesign
-          name={isFavourite ? "heart" : "hearto"}
-          size={24}
-          color={isFavourite ? "red" : "white"}
-        />
+        <AntDesign name="heart" size={24} color="white" />
       </TouchableOpacity>
     </Icon2>
   );
