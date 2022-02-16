@@ -8,6 +8,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { SafeArea1 } from "../utils/SafeArea";
 import { MenuIcon } from "../utils/icons";
 import { YeApp } from "../components/main-screen";
+import { FavoriteScreen } from "../components/favorites/favorite-screen";
 
 function NotificationsScreen({ navigation }) {
   return (
@@ -45,6 +46,7 @@ export const AppNavigation = () => {
         }}
       >
         <Drawer.Screen name="Home" component={YeApp} />
+        <Drawer.Screen name="Favorites" component={FavoriteScreen} />
       </Drawer.Navigator>
     </NavigationContainer>
   );
