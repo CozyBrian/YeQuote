@@ -1,4 +1,4 @@
-import React,{useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { colors } from "../constants";
 import styled from "styled-components/native";
 import { MenuIcon, RefreshIcon } from "../utils/icons";
@@ -14,39 +14,36 @@ const AppView = styled.View`
 const YeText = styled.Text`
   color: ${colors.text};
   font-size: 20px;
-  font-family: Roboto_400Regular
+  font-family: Roboto_400Regular;
 `;
 
 const QuoteView = styled.View`
   padding: 16px;
 `;
 
-export const YeApp = () => {
+export const YeApp = ({ navigation }) => {
   const [quote, setQuote] = useState(null);
 
-  const [fontLoaded] = useFonts({Roboto_400Regular,});
+  const [fontLoaded] = useFonts({ Roboto_400Regular });
 
   const getQuote = () => {
     fetch("https://api.kanye.rest/")
-      .then(response => response.json())
-      .then(data => {
-        setQuote(null)
-        setQuote(data.quote)
+      .then((response) => response.json())
+      .then((data) => {
+        setQuote(null);
+        setQuote(data.quote);
       });
-  }
+  };
 
   useEffect(() => {
-    getQuote()
-  }, [])
-
+    getQuote();
+  }, []);
 
   return (
     <AppView>
-      <MenuIcon/>
-      <RefreshIcon onPress={() => getQuote()}/>
-      <QuoteView>
-        {fontLoaded ? <YeText>{quote}</YeText> : null}
-      </QuoteView>
+      <MenuIcon onPress={() => navigation.toggleDrawer()} />
+      <RefreshIcon onPress={() => getQuote()} />
+      <QuoteView>{fontLoaded ? <YeText>{quote}</YeText> : null}</QuoteView>
     </AppView>
   );
-}
+};
