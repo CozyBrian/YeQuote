@@ -10,8 +10,10 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@expo-google-fonts/roboto": "^0.2.2",
     "expo": "~43.0.2",
     "expo-cli": "^4.13.0",
+    "expo-font": "~10.0.3",
     "expo-status-bar": "~1.1.0",
     "expo-updates": "~0.10.15",
     "react": "17.0.1",
