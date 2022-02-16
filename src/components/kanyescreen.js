@@ -1,8 +1,8 @@
 import React,{useState, useEffect} from "react";
 import { colors } from "../constants";
 import styled from "styled-components/native";
-import { Foundation } from '@expo/vector-icons';
-import { TouchableOpacity } from "react-native";
+import { MenuIcon, RefreshIcon } from "../utils/icons";
+import { useFonts, Roboto_400Regular } from "@expo-google-fonts/roboto";
 
 const AppView = styled.View`
   flex: 1;
@@ -14,24 +14,18 @@ const AppView = styled.View`
 const YeText = styled.Text`
   color: ${colors.text};
   font-size: 20px;
-  font-weight: 600;
+  font-family: Roboto_400Regular
 `;
 
 const QuoteView = styled.View`
   padding: 16px;
 `;
 
-
-const Icon = styled.View`
-position: absolute;
-top: 10px;
-right: 0px;
-margin: 20px;
-`;
-
-
 export const YeApp = () => {
   const [quote, setQuote] = useState(null);
+
+  const [fontLoaded] = useFonts({Roboto_400Regular,});
+
   const getQuote = () => {
     fetch("https://api.kanye.rest/")
       .then(response => response.json())
@@ -45,15 +39,13 @@ export const YeApp = () => {
     getQuote()
   }, [])
 
+
   return (
     <AppView>
-      <Icon>
-        <TouchableOpacity onPress={() => getQuote()}>
-          <Foundation name="refresh" size={24} color="white" />
-        </TouchableOpacity>
-      </Icon>
+      <MenuIcon/>
+      <RefreshIcon onPress={() => getQuote()}/>
       <QuoteView>
-        <YeText>{quote}</YeText>
+        {fontLoaded ? <YeText>{quote}</YeText> : null}
       </QuoteView>
     </AppView>
   );
