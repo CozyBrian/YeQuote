@@ -1,5 +1,5 @@
-import { StatusBar } from "expo-status-bar";
 import React from "react";
+import { StatusBar } from "expo-status-bar";
 import { AppNavigation } from "./src/navigation/app-navigation";
 import { QuoteContextProvider } from "./src/context/quote-context";
 
