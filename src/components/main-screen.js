@@ -42,8 +42,9 @@ export const YeApp = ({ navigation }) => {
   const copyToast = useToast();
   const addToast = useToast();
 
-  const showToast = () => {
+  const CopyText = () => {
     copyToast.show("Copied", { icon: <CopyIcon />, duration: 800 });
+    copy();
   };
 
   const favToast = () => {
@@ -63,7 +64,7 @@ export const YeApp = ({ navigation }) => {
         <AppView>
           <QuoteView>
             <Pressable
-              onPress={() => showToast()}
+              onPress={() => CopyText()}
               onLongPress={() => favToast(quote)}
             >
               {fontLoaded ? <YeText>{quote}</YeText> : null}

@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as Clipboard from "expo-clipboard";
 
 export const QuoteContext = createContext();
 
@@ -10,6 +11,12 @@ export const QuoteContextProvider = ({ children }) => {
 
   //AsyncStorage.removeItem("@Favorites");
   const copy = () => {
+    Clipboard.setString(quote);
+    console.log("copied");
+  };
+
+  const copyFav = (i) => {
+    Clipboard.setString(favorites[i]);
     console.log("copied");
   };
 
@@ -72,7 +79,15 @@ export const QuoteContextProvider = ({ children }) => {
 
   return (
     <QuoteContext.Provider
-      value={{ quote, copy, addFavorite, getQuote, favorites, delFavorite }}
+      value={{
+        quote,
+        copy,
+        copyFav,
+        addFavorite,
+        getQuote,
+        favorites,
+        delFavorite,
+      }}
     >
       {children}
     </QuoteContext.Provider>

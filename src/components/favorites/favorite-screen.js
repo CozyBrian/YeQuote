@@ -14,12 +14,13 @@ const Container = styled.View`
 `;
 
 export const FavoriteScreen = ({ navigation }) => {
-  const { favorites, delFavorite } = useContext(QuoteContext);
+  const { favorites, delFavorite, copyFav } = useContext(QuoteContext);
 
   const toast = useToast();
 
-  const showToast = () => {
+  const showToast = (i) => {
     toast.show("Copied", { icon: <CopyIcon />, duration: 800 });
+    copyFav(i);
   };
 
   return (
@@ -34,7 +35,7 @@ export const FavoriteScreen = ({ navigation }) => {
               key={index}
               onPress={() => delFavorite(item)}
               text={item}
-              t={() => showToast()}
+              t={() => showToast(index)}
             />
           )}
         />
