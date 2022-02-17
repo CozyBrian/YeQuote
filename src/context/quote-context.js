@@ -1,11 +1,14 @@
 import React, { createContext, useState, useEffect } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const QuoteContext = createContext();
 
 export const QuoteContextProvider = ({ children }) => {
-  const [quote, setQuote] = useState(null);
+  const [quote, setQuote] = useState("");
   const [favorites, setFavorite] = useState([]);
+  const [loaded, setLoaded] = useState(false);
 
+  //AsyncStorage.removeItem("@Favorites");
   const copy = () => {
     console.log("copied");
   };
@@ -15,7 +18,6 @@ export const QuoteContextProvider = ({ children }) => {
       return;
     }
     setFavorite([...favorites, quote]);
-    console.log(favorites);
   };
 
   const delFavorite = (quote) => {
@@ -30,6 +32,38 @@ export const QuoteContextProvider = ({ children }) => {
         setQuote(null);
         setQuote(data.quote);
       });
+  };
+
+  useEffect(() => {
+    loadData();
+  }, []);
+
+  useEffect(() => {
+    if (loaded) {
+      saveData(favorites);
+    }
+  }, [favorites]);
+
+  const saveData = async (value) => {
+    try {
+      const dataString = JSON.stringify(value);
+      await AsyncStorage.setItem("@Favorites", dataString);
+    } catch (e) {
+      console.log("could'nt Save");
+    }
+  };
+
+  const loadData = async () => {
+    try {
+      const dataString = await AsyncStorage.getItem("@Favorites");
+      if (dataString !== "null") {
+        setFavorite(JSON.parse(dataString));
+        console.log(favorites);
+      }
+    } catch (e) {
+      console.log("could'nt Load", e);
+    }
+    setLoaded(true);
   };
 
   useEffect(() => {
