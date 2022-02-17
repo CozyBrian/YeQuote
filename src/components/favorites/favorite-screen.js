@@ -13,6 +13,20 @@ const Container = styled.View`
   background-color: ${colors.blue};
 `;
 
+const FavText = styled.Text`
+  color: ${colors.text};
+  font-size: 24px;
+  font-weight: bold
+  position: relative;
+  right: 135px;
+`;
+
+const Header = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;
+
 export const FavoriteScreen = ({ navigation }) => {
   const { favorites, delFavorite, copyFav } = useContext(QuoteContext);
 
@@ -26,7 +40,10 @@ export const FavoriteScreen = ({ navigation }) => {
   return (
     <Container>
       <SafeArea>
-        <MenuIcon onPress={() => navigation.toggleDrawer()} />
+        <Header>
+          <MenuIcon onPress={() => navigation.toggleDrawer()} />
+          <FavText>FAVORITES</FavText>
+        </Header>
         <FlatList
           data={favorites}
           keyExtractor={(item) => item}
