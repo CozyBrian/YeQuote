@@ -42,7 +42,7 @@ export const FavoriteScreen = ({ navigation }) => {
       <SafeArea>
         <Header>
           <MenuIcon onPress={() => navigation.toggleDrawer()} />
-          <FavText>FAVORITES</FavText>
+          <FavText>FAVORITE</FavText>
         </Header>
         <FlatList
           data={favorites}
