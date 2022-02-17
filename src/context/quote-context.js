@@ -9,15 +9,12 @@ export const QuoteContextProvider = ({ children }) => {
   const [favorites, setFavorite] = useState([]);
   const [loaded, setLoaded] = useState(false);
 
-  //AsyncStorage.removeItem("@Favorites");
   const copy = () => {
     Clipboard.setString(quote);
-    console.log("copied");
   };
 
   const copyFav = (i) => {
     Clipboard.setString(favorites[i]);
-    console.log("copied");
   };
 
   const addFavorite = (quote) => {
@@ -65,7 +62,6 @@ export const QuoteContextProvider = ({ children }) => {
       const dataString = await AsyncStorage.getItem("@Favorites");
       if (dataString !== "null") {
         setFavorite(JSON.parse(dataString));
-        console.log(favorites);
       }
     } catch (e) {
       console.log("could'nt Load", e);
