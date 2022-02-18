@@ -9,6 +9,7 @@ import { SafeArea1 } from "../utils/SafeArea";
 import { MenuIcon } from "../utils/icons";
 import { YeApp } from "../components/main-screen";
 import { FavoriteScreen } from "../components/favorites/favorite-screen";
+import { SettingsScreen } from "../components/settings/settings-screen";
 
 function NotificationsScreen({ navigation }) {
   return (
@@ -47,6 +48,7 @@ export const AppNavigation = () => {
       >
         <Drawer.Screen name="Home" component={YeApp} />
         <Drawer.Screen name="Favorites" component={FavoriteScreen} />
+        <Drawer.Screen name="settings" component={SettingsScreen} />
       </Drawer.Navigator>
     </NavigationContainer>
   );
