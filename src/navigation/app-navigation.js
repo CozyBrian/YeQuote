@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Button, View } from "react-native";
+import { StatusBar } from "expo-status-bar";
 import {
   createDrawerNavigator,
   DrawerItemList,
@@ -23,33 +24,36 @@ const Drawer = createDrawerNavigator();
 
 export const AppNavigation = () => {
   return (
-    <NavigationContainer>
-      <Drawer.Navigator
-        screenOptions={{
-          headerShown: false,
-          swipeEnabled: false,
-          drawerStyle: { width: 220 },
-        }}
-        drawerContent={(props) => {
-          return (
-            <>
-              <SafeArea1>
-                <MenuIcon
-                  color="black"
-                  onPress={() => props.navigation.toggleDrawer()}
-                />
-                <View>
-                  <DrawerItemList {...props} />
-                </View>
-              </SafeArea1>
-            </>
-          );
-        }}
-      >
-        <Drawer.Screen name="Home" component={YeApp} />
-        <Drawer.Screen name="Favorites" component={FavoriteScreen} />
-        <Drawer.Screen name="settings" component={SettingsScreen} />
-      </Drawer.Navigator>
-    </NavigationContainer>
+    <>
+      <StatusBar style="light" />
+      <NavigationContainer>
+        <Drawer.Navigator
+          screenOptions={{
+            headerShown: false,
+            swipeEnabled: false,
+            drawerStyle: { width: 220 },
+          }}
+          drawerContent={(props) => {
+            return (
+              <>
+                <SafeArea1>
+                  <MenuIcon
+                    color="black"
+                    onPress={() => props.navigation.toggleDrawer()}
+                  />
+                  <View>
+                    <DrawerItemList {...props} />
+                  </View>
+                </SafeArea1>
+              </>
+            );
+          }}
+        >
+          <Drawer.Screen name="Home" component={YeApp} />
+          <Drawer.Screen name="Favorites" component={FavoriteScreen} />
+          <Drawer.Screen name="settings" component={SettingsScreen} />
+        </Drawer.Navigator>
+      </NavigationContainer>
+    </>
   );
 };
