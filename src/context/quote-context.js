@@ -1,13 +1,14 @@
 import React, { createContext, useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Clipboard from "expo-clipboard";
+import { log } from "react-native-reanimated";
 
 export const QuoteContext = createContext();
 
 export const QuoteContextProvider = ({ children }) => {
   const [quote, setQuote] = useState("");
-  const [favorites, setFavorite] = useState([]);
   const [loaded, setLoaded] = useState(false);
+  const [favorites, setFavorites] = useState([]);
 
   const copy = () => {
     Clipboard.setString(quote);
@@ -18,15 +19,19 @@ export const QuoteContextProvider = ({ children }) => {
   };
 
   const addFavorite = (quote) => {
-    if (favorites.includes(quote)) {
+    if (favorites === null) {
+      setFavorites([]);
+    }
+    const present = favorites.includes(quote);
+    if (present) {
       return;
     }
-    setFavorite([...favorites, quote]);
+    setFavorites([...favorites, quote]);
   };
 
   const delFavorite = (quote) => {
     const newFavourites = favorites.filter((x) => x !== quote);
-    setFavorite(newFavourites);
+    setFavorites(newFavourites);
   };
 
   const getQuote = () => {
@@ -48,6 +53,12 @@ export const QuoteContextProvider = ({ children }) => {
     }
   }, [favorites]);
 
+  useEffect(() => {
+    if (favorites === null) {
+      setFavorites([]);
+    }
+  }, [favorites]);
+
   const saveData = async (value) => {
     try {
       const dataString = JSON.stringify(value);
@@ -61,7 +72,7 @@ export const QuoteContextProvider = ({ children }) => {
     try {
       const dataString = await AsyncStorage.getItem("@Favorites");
       if (dataString !== "null") {
-        setFavorite(JSON.parse(dataString));
+        setFavorites(JSON.parse(dataString));
       }
     } catch (e) {
       console.log("could'nt Load", e);
