@@ -6,7 +6,7 @@ import { log } from "react-native-reanimated";
 export const QuoteContext = createContext();
 
 export const QuoteContextProvider = ({ children }) => {
-  const [quote, setQuote] = useState("");
+  const [quote, setQuote] = useState(null);
   const [loaded, setLoaded] = useState(false);
   const [favorites, setFavorites] = useState([]);
 

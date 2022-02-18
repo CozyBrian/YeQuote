@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from "react";
+import React, { useContext } from "react";
 import { colors } from "../constants";
 import styled from "styled-components/native";
 import { MenuIcon, RefreshIcon, CopyIcon, FavIcon } from "../utils/icons";
@@ -38,6 +38,7 @@ const IconView = styled.View`
 
 export const YeApp = ({ navigation }) => {
   const { quote, copy, addFavorite, getQuote } = useContext(QuoteContext);
+  const [fontLoaded] = useFonts({ Roboto_400Regular });
 
   const copyToast = useToast();
   const addToast = useToast();
@@ -52,7 +53,9 @@ export const YeApp = ({ navigation }) => {
     addFavorite(quote);
   };
 
-  const [fontLoaded] = useFonts({ Roboto_400Regular });
+  const isLoaded = () => {
+    return quote === null;
+  };
 
   return (
     <Container>
@@ -63,12 +66,18 @@ export const YeApp = ({ navigation }) => {
         </IconView>
         <AppView>
           <QuoteView>
-            <Pressable
-              onPress={() => CopyText()}
-              onLongPress={() => favToast(quote)}
-            >
-              {fontLoaded ? <YeText>{quote}</YeText> : null}
-            </Pressable>
+            {fontLoaded ? (
+              isLoaded() ? (
+                <YeText>Fetching Words of Ye🙇‍♂️</YeText>
+              ) : (
+                <Pressable
+                  onPress={() => CopyText()}
+                  onLongPress={() => favToast(quote)}
+                >
+                  <YeText>{quote}</YeText>
+                </Pressable>
+              )
+            ) : null}
           </QuoteView>
         </AppView>
       </SafeArea>

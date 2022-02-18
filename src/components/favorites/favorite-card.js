@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components/native";
 import { Pressable } from "react-native";
 import { FavoriteIcon } from "../../utils/icons";
+import { useFonts, Nunito_400Regular } from "@expo-google-fonts/nunito";
 import { colors } from "../../constants";
 
 const FavoritesCard = styled.View`
@@ -15,6 +16,7 @@ const FavoritesCard = styled.View`
 
 const FavText = styled.Text`
   color: ${colors.text};
+  font-family: Nunito_400Regular;
   font-size: 18px;
   margin-left: 10px;
 `;
@@ -24,6 +26,8 @@ const FavTextView = styled.View`
 `;
 
 export const FavoriteCard = ({ text = "Hello", onPress, t }) => {
+  const [fontLoaded] = useFonts({ Nunito_400Regular });
+
   return (
     <FavoritesCard>
       <FavTextView>
