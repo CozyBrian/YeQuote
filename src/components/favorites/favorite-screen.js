@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import styled from "styled-components/native";
 import { colors } from "../../constants";
 import { FlatList } from "react-native";
-
+import { useFonts, Nunito_400Regular } from "@expo-google-fonts/nunito";
 import { SafeArea } from "../../utils/SafeArea";
 import { MenuIcon, CopyIcon } from "../../utils/icons";
 import { QuoteContext } from "../../context/quote-context";
@@ -42,6 +42,7 @@ const EmptyText = styled.Text`
 
 export const FavoriteScreen = ({ navigation }) => {
   const { favorites, delFavorite, copyFav } = useContext(QuoteContext);
+  const [fontLoaded] = useFonts({ Nunito_400Regular });
 
   const toast = useToast();
 
@@ -66,7 +67,7 @@ export const FavoriteScreen = ({ navigation }) => {
           <EmptyView>
             <EmptyText>Ops! its kinda empty here😬</EmptyText>
           </EmptyView>
-        ) : (
+        ) : fontLoaded ? (
           <FlatList
             data={favorites}
             keyExtractor={(item) => item}
@@ -79,7 +80,7 @@ export const FavoriteScreen = ({ navigation }) => {
               />
             )}
           />
-        )}
+        ) : null}
       </SafeArea>
     </Container>
   );
