@@ -7,7 +7,7 @@ import * as NavigationBar from "expo-navigation-bar";
 
 export default function App() {
   useEffect(() => {
-    if (Platform === "android") {
+    if (Platform.OS === "android") {
       e();
     }
   }, []);

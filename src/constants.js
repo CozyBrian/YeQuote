@@ -11,10 +11,3 @@ export const colors = {
   black: "#000000",
   darkgrey: "#121212",
 };
-
-// "androidNavigationBar": {
-
-//   "visible": "true",
-//   "barStyle": "light-content",
-//   "backgroundColor": "#005e8f"
-//  },
