@@ -69,7 +69,9 @@ export const YeApp = ({ navigation }) => {
           <QuoteView>
             {fontLoaded ? (
               isLoaded() ? (
-                <YeText>Fetching Words of Ye🙇‍♂️</YeText>
+                <Animated.View exiting={FadeOut}>
+                  <YeText>Fetching Words of Ye🙇‍♂️</YeText>
+                </Animated.View>
               ) : (
                 <Pressable
                   onPress={() => CopyText()}
