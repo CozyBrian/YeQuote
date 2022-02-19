@@ -6,6 +6,7 @@ import { SafeArea } from "../utils/SafeArea";
 import { useFonts, Roboto_400Regular } from "@expo-google-fonts/roboto";
 import { QuoteContext } from "../context/quote-context";
 import { useToast } from "react-native-fast-toast";
+import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
 import { Pressable } from "react-native";
 
 const Container = styled.View`
@@ -74,7 +75,9 @@ export const YeApp = ({ navigation }) => {
                   onPress={() => CopyText()}
                   onLongPress={() => favToast(quote)}
                 >
-                  <YeText>{quote}</YeText>
+                  <Animated.View entering={FadeIn} exiting={FadeOut}>
+                    <YeText>{quote}</YeText>
+                  </Animated.View>
                 </Pressable>
               )
             ) : null}

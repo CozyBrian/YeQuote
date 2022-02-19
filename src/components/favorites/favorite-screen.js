@@ -19,8 +19,6 @@ const FavText = styled.Text`
   font-size: 22px;
   font-weight: bold;
 `;
-// position: relative;
-// right: 135px;
 
 const Header = styled.View`
   flex-direction: row;

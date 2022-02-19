@@ -1,17 +1,28 @@
 import React from "react";
 import styled from "styled-components/native";
-import { Pressable } from "react-native";
+import { Pressable, useWindowDimensions } from "react-native";
 import { FavoriteIcon } from "../../utils/icons";
 import { colors } from "../../constants";
+import Animated, {
+  runOnJS,
+  useAnimatedStyle,
+  useSharedValue,
+  withSpring,
+  withTiming,
+} from "react-native-reanimated";
 
-const FavoritesCard = styled.View`
+const FavoritesCard = styled(Animated.View)`
   flex-direction: row;
   background-color: ${colors.darkblue};
   justify-content: space-between;
   align-items: center;
+  align-self: center;
   border-radius: 14px;
-  margin: 6px;
+  margin-bottom: 6px;
+  height: 62px;
+  width: 95%;
 `;
+// margin: 6px;
 
 const FavText = styled.Text`
   color: ${colors.text};
@@ -25,14 +36,40 @@ const FavTextView = styled.View`
 `;
 
 export const FavoriteCard = ({ text = "Hello", onPress, t }) => {
+  const window = useWindowDimensions();
+
+  const translationX = useSharedValue(0);
+  const ItemHEIGHT = useSharedValue(62);
+  const marginB = useSharedValue(6);
+
+  const aStyle = useAnimatedStyle(() => ({
+    transform: [
+      {
+        translateX: translationX.value,
+      },
+    ],
+    height: ItemHEIGHT.value,
+    marginBottom: marginB.value,
+  }));
+
+  const moveL = () => {
+    translationX.value = withSpring(-window.width, null, (done) => {
+      if (done) {
+        runOnJS(onPress)();
+      }
+    });
+    ItemHEIGHT.value = withTiming(0);
+    marginB.value = 0;
+  };
+
   return (
-    <FavoritesCard>
+    <FavoritesCard style={aStyle}>
       <FavTextView>
         <Pressable onPress={t}>
           <FavText numberOfLines={1}>{text}</FavText>
         </Pressable>
       </FavTextView>
-      <FavoriteIcon onPress={onPress} />
+      <FavoriteIcon onPress={moveL} />
     </FavoritesCard>
   );
 };
