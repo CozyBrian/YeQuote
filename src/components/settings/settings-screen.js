@@ -3,6 +3,7 @@ import { colors } from "../../constants";
 import { SafeArea1 } from "../../utils/SafeArea";
 import styled from "styled-components/native";
 import { MenuIcon } from "../../utils/icons";
+import * as NavigationBar from "expo-navigation-bar";
 import { List, Switch, RadioButton } from "react-native-paper";
 
 const Container = styled.View`
@@ -20,6 +21,7 @@ const SettingsView = styled.View`
 
 const Footer = styled.View`
   align-items: center;
+  padding-bottom: 4px;
 `;
 
 const HeaderText = styled.Text`
