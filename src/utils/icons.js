@@ -17,11 +17,6 @@ const Icon2 = styled.View`
   padding-vertical: 20px;
 `;
 
-// position: absolute;
-// top: 10px;
-// left: 0px;
-// margin: 20px;
-
 export const RefreshIcon = ({ onPress }) => {
   return (
     <Icon1>

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Button, View } from "react-native";
+import { View } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import {
   createDrawerNavigator,
@@ -15,18 +15,10 @@ import { YeApp } from "../components/main-screen";
 import { FavoriteScreen } from "../components/favorites/favorite-screen";
 import { SettingsScreen } from "../components/settings/settings-screen";
 
-function NotificationsScreen({ navigation }) {
-  return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Button onPress={() => navigation.goBack()} title="Go back home" />
-    </View>
-  );
-}
-
 const Drawer = createDrawerNavigator();
 
 export const AppNavigation = () => {
-  const { themeM, setThemeM, theme } = React.useContext(ThemeContext);
+  const { theme } = React.useContext(ThemeContext);
 
   const Ptheme = {
     ...DefaultTheme,
@@ -61,7 +53,7 @@ export const AppNavigation = () => {
               }}
               drawerContent={(props) => {
                 return (
-                  <>
+                  <View style={{ flex: 1, backgroundColor: theme().Drawer }}>
                     <SafeArea1>
                       <MenuIcon
                         color={theme().Icond}
@@ -71,7 +63,7 @@ export const AppNavigation = () => {
                         <DrawerItemList {...props} />
                       </View>
                     </SafeArea1>
-                  </>
+                  </View>
                 );
               }}
             >

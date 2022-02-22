@@ -3,8 +3,6 @@ import { Platform } from "react-native";
 import { AppNavigation } from "./src/navigation/app-navigation";
 import { QuoteContextProvider } from "./src/context/quote-context";
 import { ToastProvider } from "react-native-fast-toast";
-import { theme } from "./src/context/theme-context";
-import { ThemeProvider } from "styled-components";
 import { ThemeProviderr } from "./src/context/theme-context";
 import * as NavigationBar from "expo-navigation-bar";
 

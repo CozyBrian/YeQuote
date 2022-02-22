@@ -1,7 +1,6 @@
 import React, { createContext, useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Clipboard from "expo-clipboard";
-import { log } from "react-native-reanimated";
 
 export const QuoteContext = createContext();
 

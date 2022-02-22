@@ -22,7 +22,6 @@ const FavoritesCard = styled(Animated.View)`
   height: 62px;
   width: 95%;
 `;
-// margin: 6px;
 
 const FavText = styled.Text`
   color: ${colors.text};

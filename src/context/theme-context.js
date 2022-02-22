@@ -1,5 +1,4 @@
 import React, { createContext, useState } from "react";
-import { colors } from "../constants";
 
 export const ThemeContext = createContext();
 
@@ -27,31 +26,8 @@ const darkTheme = {
   Status: "light",
 };
 
-const DefaultTheme = {
-  colors: {
-    primary: theme().Primary,
-    accent: theme().Secondary,
-    background: theme().Drawer,
-    surface: theme().Drawer,
-    text: theme().Text,
-    onSurface: theme().Text,
-    disabled: theme().Drawer,
-    placeholder: theme().Drawer,
-    backdrop: theme().Drawer,
-    notification: theme().light,
-  },
-};
-
-let mode;
-
-export const themec = () => {
-  return mode ? darkTheme : lightTheme;
-};
-
 export const ThemeProviderr = ({ children }) => {
   const [themeM, setThemeM] = useState(false);
-
-  mode = themeM;
 
   const theme = () => {
     return themeM ? darkTheme : lightTheme;

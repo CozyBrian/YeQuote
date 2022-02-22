@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { colors } from "../constants";
 import styled from "styled-components/native";
+import { StatusBar } from "expo-status-bar";
 import { MenuIcon, RefreshIcon, CopyIcon, FavIcon } from "../utils/icons";
 import { SafeArea } from "../utils/SafeArea";
 import { useFonts, Roboto_400Regular } from "@expo-google-fonts/roboto";

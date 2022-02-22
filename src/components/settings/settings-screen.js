@@ -1,14 +1,13 @@
-import React, { useState, useContext } from "react";
-import { colors } from "../../constants";
+import React, { useContext } from "react";
 import { SafeArea1 } from "../../utils/SafeArea";
 import styled from "styled-components/native";
 import { MenuIcon } from "../../utils/icons";
 import { ThemeContext } from "../../context/theme-context";
-import { List, Switch, RadioButton } from "react-native-paper";
+import { List, Switch } from "react-native-paper";
 
 const Container = styled.View`
   flex: 1;
-  background-color: ${colors.blue};
+  background-color: ${(props) => props.theme.Drawer};
 `;
 
 const ListView = styled.View`
@@ -42,11 +41,9 @@ const Header = styled.View`
 `;
 
 export const SettingsScreen = ({ navigation }) => {
-  const [isDarkmode, setIsDarkmode] = useState(false);
   const { themeM, setThemeM, theme } = useContext(ThemeContext);
 
   const onToggleSwitch = () => setThemeM(!themeM);
-  const [value, setValue] = React.useState("first");
 
   return (
     <Container>
@@ -73,15 +70,6 @@ export const SettingsScreen = ({ navigation }) => {
                   <Switch value={themeM} onValueChange={onToggleSwitch} />
                 )}
               />
-              <List.Accordion title="Change Background Color">
-                <RadioButton.Group
-                  onValueChange={(value) => setValue(value)}
-                  value={value}
-                >
-                  <RadioButton.Item label="First item" value="first" />
-                  <RadioButton.Item label="Second item" value="second" />
-                </RadioButton.Group>
-              </List.Accordion>
             </List.Section>
             <List.Section>
               <List.Subheader>Cache</List.Subheader>

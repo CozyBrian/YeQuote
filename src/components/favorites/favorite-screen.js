@@ -12,7 +12,7 @@ import { FavoriteCard } from "./favorite-card";
 
 const Container = styled.View`
   flex: 1;
-  background-color: ${colors.blue};
+  background-color: ${(props) => props.theme.Primary};
 `;
 
 const FavText = styled.Text`
