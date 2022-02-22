@@ -11,14 +11,14 @@ import { Pressable } from "react-native";
 
 const Container = styled.View`
   flex: 1;
-  background-color: ${colors.blue};
+  background-color: ${(props) => props.theme.Primary};
 `;
 
 const AppView = styled.View`
   flex: 1;
   align-items: center;
   justify-content: center;
-  background-color: ${colors.blue};
+  background-color: ${(props) => props.theme.Primary};
 `;
 
 const YeText = styled.Text`

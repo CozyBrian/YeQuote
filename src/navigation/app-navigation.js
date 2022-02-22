@@ -5,6 +5,9 @@ import {
   createDrawerNavigator,
   DrawerItemList,
 } from "@react-navigation/drawer";
+import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
+import { ThemeProvider } from "styled-components";
+import { ThemeContext } from "../context/theme-context";
 import { NavigationContainer } from "@react-navigation/native";
 import { SafeArea1 } from "../utils/SafeArea";
 import { MenuIcon } from "../utils/icons";
@@ -23,37 +26,62 @@ function NotificationsScreen({ navigation }) {
 const Drawer = createDrawerNavigator();
 
 export const AppNavigation = () => {
+  const { themeM, setThemeM, theme } = React.useContext(ThemeContext);
+
+  const Ptheme = {
+    ...DefaultTheme,
+    colors: {
+      primary: theme().Primary,
+      accent: theme().light,
+      background: theme().Drawer,
+      surface: theme().Drawer,
+      text: theme().Text,
+      onSurface: theme().Text,
+      disabled: theme().Drawer,
+      placeholder: theme().Drawer,
+      backdrop: theme().Drawer,
+      notification: theme().light,
+    },
+  };
+
   return (
     <>
-      <StatusBar style="light" />
-      <NavigationContainer>
-        <Drawer.Navigator
-          screenOptions={{
-            headerShown: false,
-            swipeEnabled: false,
-            drawerStyle: { width: 220 },
-          }}
-          drawerContent={(props) => {
-            return (
-              <>
-                <SafeArea1>
-                  <MenuIcon
-                    color="black"
-                    onPress={() => props.navigation.toggleDrawer()}
-                  />
-                  <View>
-                    <DrawerItemList {...props} />
-                  </View>
-                </SafeArea1>
-              </>
-            );
-          }}
-        >
-          <Drawer.Screen name="Home" component={YeApp} />
-          <Drawer.Screen name="Favorites" component={FavoriteScreen} />
-          <Drawer.Screen name="settings" component={SettingsScreen} />
-        </Drawer.Navigator>
-      </NavigationContainer>
+      <StatusBar style={theme().Status} />
+      <ThemeProvider theme={theme}>
+        <PaperProvider theme={Ptheme}>
+          <NavigationContainer>
+            <Drawer.Navigator
+              screenOptions={{
+                headerShown: false,
+                swipeEnabled: false,
+                drawerStyle: { width: 220 },
+                drawerInactiveTintColor: theme().Text,
+                // drawerActiveTintColor: theme().Secondary,
+                // drawerActiveBackgroundColor: theme().light,
+              }}
+              drawerContent={(props) => {
+                return (
+                  <>
+                    <SafeArea1>
+                      <MenuIcon
+                        color={theme().Icond}
+                        onPress={() => props.navigation.toggleDrawer()}
+                      />
+                      <View>
+                        <DrawerItemList {...props} />
+                      </View>
+                    </SafeArea1>
+                  </>
+                );
+              }}
+            >
+              <Drawer.Screen name="Home" component={YeApp} />
+              <Drawer.Screen name="Favorites" component={FavoriteScreen} />
+              <Drawer.Screen name="settings" component={SettingsScreen} />
+            </Drawer.Navigator>
+          </NavigationContainer>
+        </PaperProvider>
+      </ThemeProvider>
     </>
   );
 };

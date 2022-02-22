@@ -6,6 +6,7 @@ import { useFonts, Nunito_400Regular } from "@expo-google-fonts/nunito";
 import { SafeArea } from "../../utils/SafeArea";
 import { MenuIcon, CopyIcon } from "../../utils/icons";
 import { QuoteContext } from "../../context/quote-context";
+import { ThemeContext } from "../../context/theme-context";
 import { useToast } from "react-native-fast-toast";
 import { FavoriteCard } from "./favorite-card";
 
@@ -15,7 +16,7 @@ const Container = styled.View`
 `;
 
 const FavText = styled.Text`
-  color: ${colors.text};
+  color: ${colors.white};
   font-size: 22px;
   font-weight: bold;
 `;
@@ -33,13 +34,14 @@ const EmptyView = styled.View`
 `;
 
 const EmptyText = styled.Text`
-  color: ${colors.text};
+  color: ${colors.white};
   font-size: 20px;
   font-weight: bold;
 `;
 
 export const FavoriteScreen = ({ navigation }) => {
   const { favorites, delFavorite, copyFav } = useContext(QuoteContext);
+  const { theme } = useContext(ThemeContext);
   const [fontLoaded] = useFonts({ Nunito_400Regular });
 
   const toast = useToast();
@@ -59,7 +61,7 @@ export const FavoriteScreen = ({ navigation }) => {
         <Header>
           <MenuIcon onPress={() => navigation.toggleDrawer()} />
           <FavText>FAVORITES</FavText>
-          <MenuIcon color={colors.blue} />
+          <MenuIcon color={theme().Primary} />
         </Header>
         {isEmpty() ? (
           <EmptyView>

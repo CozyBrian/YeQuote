@@ -18,7 +18,7 @@ const FavoritesCard = styled(Animated.View)`
   align-items: center;
   align-self: center;
   border-radius: 14px;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
   height: 62px;
   width: 95%;
 `;
