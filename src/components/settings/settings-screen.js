@@ -4,6 +4,7 @@ import styled from "styled-components/native";
 import { MenuIcon } from "../../utils/icons";
 import { ThemeContext } from "../../context/theme-context";
 import { List, Switch } from "react-native-paper";
+import * as NavigationBar from "expo-navigation-bar";
 
 const Container = styled.View`
   flex: 1;
@@ -42,6 +43,11 @@ const Header = styled.View`
 
 export const SettingsScreen = ({ navigation }) => {
   const { themeM, setThemeM, theme } = useContext(ThemeContext);
+  if (themeM) {
+    NavigationBar.setBackgroundColorAsync("#05263b");
+  } else {
+    NavigationBar.setBackgroundColorAsync("#005e8fff");
+  }
 
   const onToggleSwitch = () => setThemeM(!themeM);
 
